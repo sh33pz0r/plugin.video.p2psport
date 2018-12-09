@@ -108,6 +108,7 @@ def ttv_sport():
                 ace=acestream
             url='plugin://program.plexus/?mode=1&url=%s&name=%s'%(ace,name.replace(' ','+'))
             li = xbmcgui.ListItem('%s'%name, iconImage='https://start.me/favicon/www.torrent-tv.ru')
+            li.setInfo('video', name)
             li.setProperty('IsPlayable', 'true')
             xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
     xbmcplugin.endOfDirectory(addon_handle)
