@@ -95,7 +95,7 @@ def get_ttv():
     xbmcplugin.endOfDirectory(addon_handle)
 
 def ttv_sport():
-    base_url = 'http://91.92.66.82/trash/ttv-list/ttv.sport.player.m3u'
+    base_url = 'http://91.92.66.82/trash/ttv-list/as.sport.player.m3u'
     source = read_url(base_url)
     if source:
         match= re.compile('#EXTINF:-1,(.+?)\n(.*)').findall(source)
@@ -108,6 +108,7 @@ def ttv_sport():
                 ace=acestream
             url='plugin://program.plexus/?mode=1&url=%s&name=%s'%(ace,name.replace(' ','+'))
             li = xbmcgui.ListItem('%s'%name, iconImage='https://start.me/favicon/www.torrent-tv.ru')
+            li.setInfo('video', name)
             li.setProperty('IsPlayable', 'true')
             xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
     xbmcplugin.endOfDirectory(addon_handle)
@@ -142,7 +143,7 @@ def open_ttv_stream(url,name):
 
 
 def get_ttv_cat(cat,tag):
-    url="http://91.92.66.82/trash/ttv-list/ttv.m3u"
+    url="http://91.92.66.82/trash/ttv-list/ace.all.player.m3u"
     html=read_url(url)
     dicty=json.loads(tag)
     dicty = {k.encode('utf-8'): v for k, v in dicty.items()}
@@ -159,7 +160,7 @@ def get_ttv_cat(cat,tag):
 
 def ttv_cats():
     dict_torrent = {}
-    url="http://91.92.66.82/trash/ttv-list/ttv.m3u"
+    url="http://91.92.66.82/trash/ttv-list/ace.all.player.m3u"
     html_source=read_url(url)
     match = re.compile('#EXTINF:-1,(.+?)\n(.*)').findall(html_source)
     for title, acehash in match:
